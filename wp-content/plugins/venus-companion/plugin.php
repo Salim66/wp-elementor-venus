@@ -4,6 +4,7 @@ use VenusCompanion\Widgets\Hello_World;
 use VenusCompanion\Widgets\Inline_Editing;
 use VenusCompanion\Widgets\Image_Hover;
 use VenusCompanion\Widgets\Icon_Text;
+use VenusCompanion\Widgets\Portfolio;
 /**
  * Class Plugin
  *
@@ -50,6 +51,7 @@ class VenusPlugin {
 	 */
 	public function widget_scripts() {
 		wp_register_script( 'elementor-hello-world', plugins_url( '/assets/js/hello-world.js', __FILE__ ), [ 'jquery' ], false, true );
+		wp_register_script( 'venus-portfolio', plugins_url( '/assets/js/venus-portfolio.js', __FILE__ ), [ 'jquery', 'imagesloaded-js', 'isotope-js' ], false, true );
 	}
 
 	/**
@@ -65,6 +67,7 @@ class VenusPlugin {
 		require_once( __DIR__ . '/widgets/inline-editing.php' );
 		require_once( __DIR__ . '/widgets/image-hover.php' );
 		require_once( __DIR__ . '/widgets/icon-text.php' );
+		require_once( __DIR__ . '/widgets/portfolio.php' );
 	}
 
 	/**
@@ -84,6 +87,7 @@ class VenusPlugin {
 		\Elementor\Plugin::instance()->widgets_manager->register_widget_type( new Inline_Editing() );
 		\Elementor\Plugin::instance()->widgets_manager->register_widget_type( new Image_Hover() );
 		\Elementor\Plugin::instance()->widgets_manager->register_widget_type( new Icon_Text() );
+		\Elementor\Plugin::instance()->widgets_manager->register_widget_type( new Portfolio() );
 	}
 
 	/**
