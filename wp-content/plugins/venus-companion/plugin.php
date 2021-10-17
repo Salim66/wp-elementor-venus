@@ -7,6 +7,7 @@ use VenusCompanion\Widgets\Icon_Text;
 use VenusCompanion\Widgets\Portfolio;
 use VenusCompanion\Widgets\Team_Member;
 use VenusCompanion\Widgets\Testimonial;
+use VenusCompanion\Widgets\Services;
 /**
  * Class Plugin
  *
@@ -73,6 +74,7 @@ class VenusPlugin {
 		require_once( __DIR__ . '/widgets/portfolio.php' );
 		require_once( __DIR__ . '/widgets/team-member.php' );
 		require_once( __DIR__ . '/widgets/testimonial-widget.php' );
+		require_once( __DIR__ . '/widgets/service-widget.php' );
 	}
 
 	/**
@@ -95,6 +97,7 @@ class VenusPlugin {
 		\Elementor\Plugin::instance()->widgets_manager->register_widget_type( new Portfolio() );
 		\Elementor\Plugin::instance()->widgets_manager->register_widget_type( new Team_Member() );
 		\Elementor\Plugin::instance()->widgets_manager->register_widget_type( new Testimonial());
+		\Elementor\Plugin::instance()->widgets_manager->register_widget_type( new Services());
 	}
 
 	/**
