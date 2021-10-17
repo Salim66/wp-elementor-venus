@@ -5,6 +5,7 @@ use VenusCompanion\Widgets\Inline_Editing;
 use VenusCompanion\Widgets\Image_Hover;
 use VenusCompanion\Widgets\Icon_Text;
 use VenusCompanion\Widgets\Portfolio;
+use VenusCompanion\Widgets\Team_Member;
 /**
  * Class Plugin
  *
@@ -68,6 +69,7 @@ class VenusPlugin {
 		require_once( __DIR__ . '/widgets/image-hover.php' );
 		require_once( __DIR__ . '/widgets/icon-text.php' );
 		require_once( __DIR__ . '/widgets/portfolio.php' );
+		require_once( __DIR__ . '/widgets/team-member.php' );
 	}
 
 	/**
@@ -88,6 +90,7 @@ class VenusPlugin {
 		\Elementor\Plugin::instance()->widgets_manager->register_widget_type( new Image_Hover() );
 		\Elementor\Plugin::instance()->widgets_manager->register_widget_type( new Icon_Text() );
 		\Elementor\Plugin::instance()->widgets_manager->register_widget_type( new Portfolio() );
+		\Elementor\Plugin::instance()->widgets_manager->register_widget_type( new Team_Member() );
 	}
 
 	/**
