@@ -1,15 +1,14 @@
 <?php
-namespace ElementorHelloWorld;
-
-use ElementorHelloWorld\PageSettings\Page_Settings;
-
+namespace VenusCompanion;
+use VenusCompanion\Widgets\Hello_World;
+use VenusCompanion\Widgets\Inline_Editing;
 /**
  * Class Plugin
  *
  * Main Plugin class
  * @since 1.2.0
  */
-class Plugin {
+class VenusPlugin {
 
 	/**
 	 * Instance
@@ -52,46 +51,6 @@ class Plugin {
 	}
 
 	/**
-	 * Editor scripts
-	 *
-	 * Enqueue plugin javascripts integrations for Elementor editor.
-	 *
-	 * @since 1.2.1
-	 * @access public
-	 */
-	public function editor_scripts() {
-		add_filter( 'script_loader_tag', [ $this, 'editor_scripts_as_a_module' ], 10, 2 );
-
-		wp_enqueue_script(
-			'elementor-hello-world-editor',
-			plugins_url( '/assets/js/editor/editor.js', __FILE__ ),
-			[
-				'elementor-editor',
-			],
-			'1.2.1',
-			true
-		);
-	}
-
-	/**
-	 * Force load editor script as a module
-	 *
-	 * @since 1.2.1
-	 *
-	 * @param string $tag
-	 * @param string $handle
-	 *
-	 * @return string
-	 */
-	public function editor_scripts_as_a_module( $tag, $handle ) {
-		if ( 'elementor-hello-world-editor' === $handle ) {
-			$tag = str_replace( '<script', '<script type="module"', $tag );
-		}
-
-		return $tag;
-	}
-
-	/**
 	 * Include Widgets files
 	 *
 	 * Load widgets files
@@ -117,21 +76,8 @@ class Plugin {
 		$this->include_widgets_files();
 
 		// Register Widgets
-		\Elementor\Plugin::instance()->widgets_manager->register_widget_type( new Widgets\Hello_World() );
-		\Elementor\Plugin::instance()->widgets_manager->register_widget_type( new Widgets\Inline_Editing() );
-	}
-
-	/**
-	 * Add page settings controls
-	 *
-	 * Register new settings for a document page settings.
-	 *
-	 * @since 1.2.1
-	 * @access private
-	 */
-	private function add_page_settings_controls() {
-		require_once( __DIR__ . '/page-settings/manager.php' );
-		new Page_Settings();
+		\Elementor\Plugin::instance()->widgets_manager->register_widget_type( new Hello_World() );
+		\Elementor\Plugin::instance()->widgets_manager->register_widget_type( new Inline_Editing() );
 	}
 
 	/**
@@ -149,13 +95,8 @@ class Plugin {
 
 		// Register widgets
 		add_action( 'elementor/widgets/widgets_registered', [ $this, 'register_widgets' ] );
-
-		// Register editor scripts
-		add_action( 'elementor/editor/after_enqueue_scripts', [ $this, 'editor_scripts' ] );
-		
-		$this->add_page_settings_controls();
 	}
 }
 
 // Instantiate Plugin Class
-Plugin::instance();
+VenusPlugin::instance();

@@ -1,22 +1,19 @@
 <?php
 /**
- * Plugin Name: Elementor Hello World
- * Description: Elementor sample plugin.
+ * Plugin Name: Venus Companion
+ * Description: Venus Companion plugin.
  * Plugin URI:  https://elementor.com/
- * Version:     1.2.1
- * Author:      Author Name
- * Author URI:  https://elementor.com/
- * Text Domain: elementor-hello-world
- * Elementor tested up to: 3.0.0
- * Elementor Pro tested up to: 3.0.0
+ * Version:     1.0.0
+ * Author:      LWHH
+ * Author URI:  https://learnwith.hasinhayder.com
+ * Text Domain: venus-companion
  */
 
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
 /**
- * Main Elementor Hello World Class
+ * Main Venus Companion Class
  *
- * The init class that runs the Hello World plugin.
  * Intended To make sure that the plugin's minimum requirements are met.
  *
  * You should only modify the constants to match your plugin's needs.
@@ -24,15 +21,15 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
  * Any custom code should go inside Plugin Class in the plugin.php file.
  * @since 1.2.0
  */
-final class Elementor_Hello_World {
+final class VenusCompanion {
 
 	/**
 	 * Plugin Version
 	 *
-	 * @since 1.2.1
+	 * @since 1.2.0
 	 * @var string The plugin version.
 	 */
-	const VERSION = '1.2.1';
+	const VERSION = '1.2.0';
 
 	/**
 	 * Minimum Elementor Version
@@ -40,7 +37,7 @@ final class Elementor_Hello_World {
 	 * @since 1.2.0
 	 * @var string Minimum Elementor version required to run the plugin.
 	 */
-	const MINIMUM_ELEMENTOR_VERSION = '3.0.0';
+	const MINIMUM_ELEMENTOR_VERSION = '2.0.0';
 
 	/**
 	 * Minimum PHP Version
@@ -75,7 +72,7 @@ final class Elementor_Hello_World {
 	 * @access public
 	 */
 	public function i18n() {
-		load_plugin_textdomain( 'elementor-hello-world' );
+		load_plugin_textdomain( 'venus-companion' );
 	}
 
 	/**
@@ -129,9 +126,9 @@ final class Elementor_Hello_World {
 
 		$message = sprintf(
 			/* translators: 1: Plugin name 2: Elementor */
-			esc_html__( '"%1$s" requires "%2$s" to be installed and activated.', 'elementor-hello-world' ),
-			'<strong>' . esc_html__( 'Elementor Hello World', 'elementor-hello-world' ) . '</strong>',
-			'<strong>' . esc_html__( 'Elementor', 'elementor-hello-world' ) . '</strong>'
+			esc_html__( '"%1$s" requires "%2$s" to be installed and activated.', 'venus-companion' ),
+			'<strong>' . esc_html__( 'Venus Companion', 'venus-companion' ) . '</strong>',
+			'<strong>' . esc_html__( 'Elementor', 'venus-companion' ) . '</strong>'
 		);
 
 		printf( '<div class="notice notice-warning is-dismissible"><p>%1$s</p></div>', $message );
@@ -152,9 +149,9 @@ final class Elementor_Hello_World {
 
 		$message = sprintf(
 			/* translators: 1: Plugin name 2: Elementor 3: Required Elementor version */
-			esc_html__( '"%1$s" requires "%2$s" version %3$s or greater.', 'elementor-hello-world' ),
-			'<strong>' . esc_html__( 'Elementor Hello World', 'elementor-hello-world' ) . '</strong>',
-			'<strong>' . esc_html__( 'Elementor', 'elementor-hello-world' ) . '</strong>',
+			esc_html__( '"%1$s" requires "%2$s" version %3$s or greater.', 'venus-companion' ),
+			'<strong>' . esc_html__( 'Venus Companion', 'venus-companion' ) . '</strong>',
+			'<strong>' . esc_html__( 'Elementor', 'venus-companion' ) . '</strong>',
 			self::MINIMUM_ELEMENTOR_VERSION
 		);
 
@@ -176,9 +173,9 @@ final class Elementor_Hello_World {
 
 		$message = sprintf(
 			/* translators: 1: Plugin name 2: PHP 3: Required PHP version */
-			esc_html__( '"%1$s" requires "%2$s" version %3$s or greater.', 'elementor-hello-world' ),
-			'<strong>' . esc_html__( 'Elementor Hello World', 'elementor-hello-world' ) . '</strong>',
-			'<strong>' . esc_html__( 'PHP', 'elementor-hello-world' ) . '</strong>',
+			esc_html__( '"%1$s" requires "%2$s" version %3$s or greater.', 'venus-companion' ),
+			'<strong>' . esc_html__( 'Venus Companion', 'venus-companion' ) . '</strong>',
+			'<strong>' . esc_html__( 'PHP', 'venus-companion' ) . '</strong>',
 			self::MINIMUM_PHP_VERSION
 		);
 
@@ -186,5 +183,4 @@ final class Elementor_Hello_World {
 	}
 }
 
-// Instantiate Elementor_Hello_World.
-new Elementor_Hello_World();
+new VenusCompanion();
