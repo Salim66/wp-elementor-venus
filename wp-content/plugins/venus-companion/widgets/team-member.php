@@ -121,9 +121,9 @@ class Team_Member extends Widget_Base {
 		);
 
 		$this->add_control(
-			'description',
+			'designation',
 			[
-				'label' => __( 'Description', 'venus-companion' ),
+				'label' => __( 'Designation', 'venus-companion' ),
 				'type' => Controls_Manager::TEXTAREA,
 			]
 		);
@@ -194,7 +194,7 @@ class Team_Member extends Widget_Base {
 			<div class="team-info">
 				<div class="team-title">
 					<h6><?php echo esc_html($settings['name']); ?> </h6>
-					<p><?php echo esc_html($settings['description']); ?></p>
+					<p><?php echo esc_html($settings['designation']); ?></p>
 				</div>
 				<div class="team-social-links">
 					<a href="<?php echo esc_html($settings['facebook']); ?>"><i class="fab fa-facebook-f"></i></a>

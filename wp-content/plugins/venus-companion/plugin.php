@@ -6,6 +6,7 @@ use VenusCompanion\Widgets\Image_Hover;
 use VenusCompanion\Widgets\Icon_Text;
 use VenusCompanion\Widgets\Portfolio;
 use VenusCompanion\Widgets\Team_Member;
+use VenusCompanion\Widgets\Testimonial;
 /**
  * Class Plugin
  *
@@ -53,6 +54,7 @@ class VenusPlugin {
 	public function widget_scripts() {
 		wp_register_script( 'elementor-hello-world', plugins_url( '/assets/js/hello-world.js', __FILE__ ), [ 'jquery' ], false, true );
 		wp_register_script( 'venus-portfolio', plugins_url( '/assets/js/venus-portfolio.js', __FILE__ ), [ 'jquery', 'imagesloaded-js', 'isotope-js' ], false, true );
+		wp_register_script( 'venus-carousel', plugins_url( '/assets/js/venus-carousel.js', __FILE__ ), [ 'jquery','imagesloaded-js','isotope-js' ], time(), true );
 	}
 
 	/**
@@ -70,6 +72,7 @@ class VenusPlugin {
 		require_once( __DIR__ . '/widgets/icon-text.php' );
 		require_once( __DIR__ . '/widgets/portfolio.php' );
 		require_once( __DIR__ . '/widgets/team-member.php' );
+		require_once( __DIR__ . '/widgets/testimonial-widget.php' );
 	}
 
 	/**
@@ -91,6 +94,7 @@ class VenusPlugin {
 		\Elementor\Plugin::instance()->widgets_manager->register_widget_type( new Icon_Text() );
 		\Elementor\Plugin::instance()->widgets_manager->register_widget_type( new Portfolio() );
 		\Elementor\Plugin::instance()->widgets_manager->register_widget_type( new Team_Member() );
+		\Elementor\Plugin::instance()->widgets_manager->register_widget_type( new Testimonial());
 	}
 
 	/**
