@@ -3,6 +3,7 @@ namespace VenusCompanion;
 use VenusCompanion\Widgets\Hello_World;
 use VenusCompanion\Widgets\Inline_Editing;
 use VenusCompanion\Widgets\Image_Hover;
+use VenusCompanion\Widgets\Icon_Text;
 /**
  * Class Plugin
  *
@@ -63,6 +64,7 @@ class VenusPlugin {
 		require_once( __DIR__ . '/widgets/hello-world.php' );
 		require_once( __DIR__ . '/widgets/inline-editing.php' );
 		require_once( __DIR__ . '/widgets/image-hover.php' );
+		require_once( __DIR__ . '/widgets/icon-text.php' );
 	}
 
 	/**
@@ -81,6 +83,7 @@ class VenusPlugin {
 		\Elementor\Plugin::instance()->widgets_manager->register_widget_type( new Hello_World() );
 		\Elementor\Plugin::instance()->widgets_manager->register_widget_type( new Inline_Editing() );
 		\Elementor\Plugin::instance()->widgets_manager->register_widget_type( new Image_Hover() );
+		\Elementor\Plugin::instance()->widgets_manager->register_widget_type( new Icon_Text() );
 	}
 
 	/**
