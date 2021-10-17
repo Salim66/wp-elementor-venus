@@ -52,7 +52,7 @@ class Portfolio extends Widget_Base {
 	 * @return string Widget icon.
 	 */
 	public function get_icon() {
-		return 'eicon-gallery-grid';
+		return 'eicon-posts-ticker';
 	}
 
 	/**
@@ -109,28 +109,44 @@ class Portfolio extends Widget_Base {
 			'show_tags',
 			[
 				'label' => __( 'Show Tags', 'venus-companion' ),
-				'type' => Controls_Manager::SWITCHER,
-				'label_on'=>__('Show', 'venus-companion'),
-				'label_off'=>__('Hide', 'venus-companion'),
-				'return_value'=>'yes',
-				'default'=>'yes'
+				'type' => \Elementor\Controls_Manager::SWITCHER,
+				'label_on' => __( 'Show', 'venus-companion' ),
+				'label_off' => __( 'Hide', 'venus-companion' ),
+				'return_value' => 'yes',
+				'default' => 'yes',
 			]
-		);
+        );
 
-		$this->add_control(
+        $this->add_control(
 			'portfolio_style',
 			[
 				'label' => __( 'Portfolio Style', 'venus-companion' ),
-				'type' => Controls_Manager::SELECT,
-				'default'=>'masonry',
-				'options'=>[
-					'masonry'=>__('Masonry', 'venus-companion'),
-					'square'=>__('Square', 'venus-companion'),
-				]
+				'type' => \Elementor\Controls_Manager::SELECT,
+				'default' => 'masonry',
+				'options' => [
+					'masonry' => __( 'Masonry', 'venus-companion' ),
+					'square'  => __( 'Square', 'venus-companion' ),
+				],
+			]
+		); 
+		
+		$this->add_control(
+			'portfolio_column',
+			[
+				'label' => __( 'Portfolio Column', 'venus-companion' ),
+				'type' => \Elementor\Controls_Manager::SELECT,
+				'default' => 'grid-3',
+				'options' => [
+					'grid-2' => __( 'Grid 2', 'venus-companion' ),
+					'grid-3' => __( 'Grid 3', 'venus-companion' ),
+					'grid-4' => __( 'Grid 4', 'venus-companion' ),
+				],
 			]
 		);
 
 		$this->end_controls_section();
+
+		
 	}
 
 	/**
@@ -145,54 +161,62 @@ class Portfolio extends Widget_Base {
 	protected function render() {
 		$settings = $this->get_settings_for_display();
 
-		if($settings['show_tags']=='yes'){
-			$tags = get_terms([
-				'hide_empty'=>true,
-				'taxonomy'=>'ptags'
-			]);
-			?>
-			<div class="text-center">
-				<ul class="portfolio-filter">
-					<li class="active"><a href="#" data-filter="*"> All</a></li>
-					<?php
-					foreach($tags as $tag){
-						printf('<li><a href="#" data-filter=".%s">%s</a></li>',esc_attr($tag->slug),esc_html($tag->name));
-					}
-					?>
-				</ul>
-			</div>
-			<?php 
+        if($settings['show_tags']=='yes'){
+            $tags = get_terms([
+                'hide_empty'=>true,
+                'taxonomy'=>'ptags'
+            ]);
+            ?>
+            <div class="text-center">
+                <ul class="portfolio-filter">
+                    <li class="active"><a href="#" data-filter="*"> All</a></li>
+                    <?php 
+                    foreach($tags as $tag){
+                        printf('<li><a href="#" data-filter=".%s">%s</a></li>',esc_attr($tag->slug),esc_html($tag->name));
+                    }
+                    ?>
+                </ul>
+            </div>
+            <?php
 
-			$postfolios = new WP_Query([
-				'posts_per_page'=>-1,
-				'post_type'=>'portfolio',
-				'post_status'=>'publish'
-			]);
+            $postfolios = new WP_Query([
+                'posts_per_page'=>-1,
+                'post_type'=>'portfolio',
+                'post_status'=>'publish'
+            ]);
 
-			echo '<div class="portfolio-grid portfolio-gallery grid-3 gutter" style="position: relative; height: 901.313px;">';
-			while($postfolios->have_posts()){
-				$postfolios->the_post();
-				$postfolio_tags = $this->get_portfolio_tags(get_the_ID());
-				$image_url = get_the_post_thumbnail_url(get_the_ID(),'large');
-				?>
-				<div class="portfolio-item <?php echo esc_attr($postfolio_tags); ?>">
-					<a href="<?php echo esc_url($image_url); ?>" class="portfolio-image popup-gallery" title="Venus Product">
-						<img src="<?php echo esc_url($image_url); ?>" alt="">
-						<div class="portfolio-hover-title">
-							<div class="portfolio-content">
-								<h6><?php the_title(); ?></h6>
-								<div class="portfolio-category">
-									<span><?php the_excerpt(); ?></span>
-								</div>
-							</div>
-						</div>
-					</a>
-				</div>
-				<?php
-			}
-			echo '</div>';
-		}
-	}
+            echo '<div class="portfolio-grid portfolio-gallery '. $settings['portfolio_column'] .' gutter">';
+            while($postfolios->have_posts()){
+                $postfolios->the_post();
+				$portfolio_tags = $this->get_portfolio_tags(get_the_ID());
+				if($settings['portfolio_style']=='square'){
+					$image_url  = get_the_post_thumbnail_url(get_the_ID(),'venus-team');
+				}else{
+					$image_url  = get_the_post_thumbnail_url(get_the_ID(),'large');
+				}
+                ?>
+                <div class="portfolio-item <?php echo esc_attr($portfolio_tags) ;?>">
+                    <a href="<?php echo esc_url($image_url)  ;?>" class="portfolio-image popup-gallery"
+                        title="Venus Product">
+                        <img src="<?php echo esc_url($image_url)  ;?>" alt="" />
+                        <div class="portfolio-hover-title">
+                            <div class="portfolio-content">
+                                <h6><?php the_title() ;?></h6>
+                                <div class="portfolio-category">
+                                    <span><?php the_excerpt() ;?></span>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <?php
+            }
+            echo '</div>';
+
+            wp_reset_query();
+        }
+
+        }
 
 	/**
 	 * Render the widget output in the editor.
@@ -203,21 +227,22 @@ class Portfolio extends Widget_Base {
 	 *
 	 * @access protected
 	 */
-	protected function _content_template() {
+	/* protected function _content_template() {
 		?>
 		<div class="title">
 			{{{ settings.title }}}
 		</div>
 		<?php
-	}
+    } */
+    
+    private function get_portfolio_tags($post_id){
+		$tags = get_the_terms($post_id,'ptags');
+        $_tags = [];
+        foreach($tags as $tag){
+            $_tags[$tag->term_id] = $tag->slug;
+        }
 
-	private function get_portfolio_tags($post_id){
-		$tags = get_the_terms($post_id, 'ptags');
-		$_tags = [];
-		foreach($tags as $tag){
-			$_tags[$tag->term_id] = $tag->slug;
-		}
-		return join(' ', $_tags);
-	}
-
+        return join(' ',$_tags);
+    }
+    
 }
