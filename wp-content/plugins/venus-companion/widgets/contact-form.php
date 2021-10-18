@@ -83,9 +83,9 @@ class Contact_Form extends Widget_Base {
 	 *
 	 * @return array Widget scripts dependencies.
 	 */
-	// public function get_script_depends() {
-	// 	return [ 'venus-companion' ];
-	// }
+	public function get_script_depends() {
+		return [ 'venus-contact' ];
+	}
 
 	/**
 	 * Register the widget controls.
@@ -134,7 +134,7 @@ class Contact_Form extends Widget_Base {
 			'field_placeholder', [
 				'label' => __( 'Placeholder Text', 'venus-companion' ),
 				'type' => \Elementor\Controls_Manager::TEXT,
-				'show_label' => false,
+				'label_block' => true,
 			]
 		);
 
@@ -195,30 +195,32 @@ class Contact_Form extends Widget_Base {
 	 * @access protected
 	 */
 	protected function render() {
-		$settings = $this->get_settings_for_display();
-
-		?>
-		<div class="form-wrapper">
-			<form action="" class="p-4 py-5">
-				<h5 class="mb-3"><?php echo esc_html($settings['title']); ?></h5>
-				<?php
-				foreach($settings['fields'] as $field){
-					if('text' == $field['field_type']){
-						printf('<div class="form-group">
-							<input id="%s" type="text" class="form-control" placeholder="%s">
-						</div>',esc_attr($field['field_id']),esc_attr($field['field_placeholder']));
-					}else {
-						printf('<div class="form-group">
-							<textarea id="%s" type="text" class="form-control" placeholder="%s"></textarea>
-						</div>',esc_attr($field['field_id']),esc_attr($field['field_placeholder']));
-					}
-				}
-				?>
-				<button type="submit" class="btn btn-pill btn-primary"><?php echo esc_html($settings['button_title']); ?></button>
-			</form>
-		</div>
-		<?php 
-	}
+        $settings = $this->get_settings_for_display();
+        ?>
+        <div class="form-wrapper">
+            <form class="p-4 py-5" >
+                <?php 
+                wp_nonce_field('venus_contact','venus_nonce');
+                ?>
+                <h5 class="mb-3"><?php echo esc_html($settings['title']) ;?></h5>
+                <?php 
+                foreach($settings['fields'] as $field){
+                    if('text'==$field['field_type']){
+                        printf('<div class="form-group">
+                            <input id="%s" type="text" class="form-control" placeholder="%s">
+                        </div>',esc_attr($field['field_id']),esc_attr($field['field_placeholder']));
+                    }else{
+                        printf('<div class="form-group">
+                            <textarea id="%s" class="form-control" rows="4" placeholder="Message"></textarea>
+                        </div>',esc_attr($field['field_id']),esc_attr($field['field_placeholder']));
+                    }
+                }
+                ?>
+                <button  type="submit" class="contact_button btn btn-pill btn-primary"><?php echo esc_html($settings['button_title']) ;?></button>
+            </form>
+        </div>
+        <?php
+    }
 
 	/**
 	 * Render the widget output in the editor.

@@ -63,6 +63,9 @@ class VenusPlugin {
 		wp_register_script( 'venus-carousel', plugins_url( '/assets/js/venus-carousel.js', __FILE__ ), [ 'jquery','imagesloaded-js','isotope-js' ], time(), true );
 		wp_register_script( 'venus-client-logo', plugins_url( '/assets/js/venus-client-logo.js', __FILE__ ), [ 'jquery','imagesloaded-js','isotope-js' ], time(), true );
 		wp_register_script( 'venus-team-carousel', plugins_url( '/assets/js/venus-team-carousel.js', __FILE__ ), [ 'jquery','imagesloaded-js','isotope-js' ], time(), true );
+		wp_register_script( 'venus-contact', plugins_url( '/assets/js/contact.js', __FILE__ ), array('jquery'), time(), true );
+		$ajax_url = admin_url('admin-ajax.php');
+		wp_localize_script('venus-contact','venus',['ajax_url'=>$ajax_url]);
 	}
 
 	/**
@@ -132,6 +135,22 @@ class VenusPlugin {
 
 		// Register widgets
 		add_action( 'elementor/widgets/widgets_registered', [ $this, 'register_widgets' ] );
+
+		add_action('wp_ajax_nopriv_venus_contact',[$this,'process_contact_form']);
+		add_action('wp_ajax_venus_contact',[$this,'process_contact_form']);
+	}
+
+	public function process_contact_form(){
+		if(wp_verify_nonce($_POST['nonce'],'venus_contact')){
+			$email = get_option('admin_email');
+			$data = "";
+			foreach($_POST['formdata'] as $key=>$val){
+				$data .= sprintf("%s = %s<br/>",$key,sanitize_text_field($val));
+			}
+			wp_mail($email,__("Contact Form Submission","venus-companion"),$data);
+			echo "sent";
+		}
+		die();
 	}
 }
 
