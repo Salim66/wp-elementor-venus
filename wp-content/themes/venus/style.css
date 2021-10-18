@@ -10,3 +10,8 @@
 	Text Domain: venus
 	Tags: flexible-header, custom-colors, custom-menu, custom-logo, featured-images, threaded-comments, translation-ready
 */
+
+.custom-logo {
+	height: 26px;
+	width: auto;
+}

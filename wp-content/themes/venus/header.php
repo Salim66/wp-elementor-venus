@@ -17,10 +17,17 @@
                     <!--<div class="branding-wrap">-->
                     <!--brand start-->
                     <div class="navbar-brand float-left">
-                        <a class="" href="index.html">
+                        <?php 
+                            the_custom_logo();
+                            if(!has_custom_logo()){
+                        ?>
+                        <a class="" href="<?php echo home_url(); ?>">
                             <img class="logo-dark" src="<?php echo get_stylesheet_directory_uri();?>/assets/img/logo-dark.png"
                                 srcset="<?php echo get_stylesheet_directory_uri();?>/assets/img/logo-dark@2x.png 2x" alt="Venus">
                         </a>
+                        <?php
+                            }
+                        ?>
                     </div>
                     <!--brand end-->
                     <!--start responsive nav toggle button-->

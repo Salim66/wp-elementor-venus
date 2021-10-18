@@ -24,8 +24,8 @@ function venus_theme_init() {
     add_theme_support(
         'custom-logo',
         array(
-            'height'      => 200,
-            'width'       => 600,
+            'height'      => 26,
+            'width'       => 90,
             'flex-width'  => true,
             'flex-height' => true,
         )
