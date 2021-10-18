@@ -69,14 +69,9 @@
         <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
             <div class="modal-content border-0">
                 <div class="modal-body">
-                    <form>
-                        <div class="form-group mb-0">
-                            <div class="icon-field-right">
-                                <i class="vl-search"></i>
-                                <input type="text" class="form-control border-0" placeholder="Type Here...">
-                            </div>
-                        </div>
-                    </form>
+                    <?php 
+                        get_search_form();
+                    ?>
                 </div>
             </div>
         </div>
