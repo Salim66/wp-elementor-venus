@@ -144,16 +144,16 @@ class Bullet_list extends Widget_Base {
 	 */
 	protected function render() {
 		$settings = $this->get_settings_for_display();
-		$list_items = explode("\n", $settings['list_items']);
-		?>
-		<ul class="list-unstyled text-muted">
-			<?php
-			foreach($list_items as $list_item){
-				printf('<li><i class="vl-minus font-size-12 pr-2 pb-0>%s</i></li>', $list_item);
-			}
-			?>
-		</ul>
-		<?php
+        $list_items  = explode("\n",$settings['list_items']);
+        ?>
+        <ul class="list-unstyled text-muted">
+            <?php 
+            foreach($list_items as $list_item){
+                printf('<li><i class="vl-minus font-size-12 pr-3 pb-0"></i>%s</li>',$list_item);
+            }
+            ?>
+        </ul>
+        <?php
 	}
 
 	/**
