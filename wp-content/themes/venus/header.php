@@ -48,24 +48,13 @@
                         </div>
                         <!--extra links end-->
                         <!--start nav-->
-                        <ul class="vlmenu dark-sub-menu slide-effect float-right">
-                            <li><a href="index.html">Home</a></li>
-                            <li><a href="page-about-us.html">About Us</a> </li>
-                            <li><a href="page-services.html">Services</a> </li>
-                            <li><a href="portfolio.html">Portfolio</a> </li>
-                            <li><a href="#">Pages <i class="fa fa-angle-down"></i></a>
-                                <!--start level 2-->
-                                <ul>
-
-                                    <li><a href="page-team.html">Our Team</a> </li>
-                                    <li><a href="utility-404.html">404 Error</a></li>
-                                    <li><a href="utility-500.html">500 Error</a></li>
-                                    <li><a href="utility-search-result.html">Search Result</a></li>
-                                </ul>
-                                <!--end level 2-->
-                            </li>
-                            <li><a href="page-contact.html">Contact Us</a> </li>
-                        </ul>
+                        <?php
+                            wp_nav_menu([
+                                'theme_location'=>'primary',
+                                'menu_class'=>'vlmenu dark-sub-menu slide-effect float-right'
+                            ]);
+                        ?>
+                    
                         <!--end nav-->
                     </nav>
                     <!--top mega menu end-->

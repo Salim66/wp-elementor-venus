@@ -1,5 +1,8 @@
 <?php
 
+use HasinHayder\WPHelper\Modules\NavMenu;
+require_once("inc/wphelper/vendor/autoload.php");
+
 function venus_theme_init() {
     load_theme_textdomain( 'venus', get_template_directory() . '/languages' );
     add_theme_support( 'automatic-feed-links' );
@@ -34,7 +37,9 @@ function venus_theme_init() {
     register_nav_menus(
         array(
             'primary'  => __( 'Primary', 'venus' ),
-            'footer'  => __( 'Footer', 'venus' ),
+            'footerl'  => __( 'Footer Left', 'venus' ),
+            'footerm'  => __( 'Footer Middle', 'venus' ),
+            'footerr'  => __( 'Footer Right', 'venus' ),
         )
     );
 
@@ -71,3 +76,7 @@ function venus_scripts(){
     wp_enqueue_script('vl-nav', get_theme_file_uri('assets/vendor/vl-nav/js/vl-menu.js'), ['jquery','venus-js'], '1.0', true);
 }
 add_action('wp_enqueue_scripts','venus_scripts');
+
+NavMenu::set_li_class('d-block', 'footerl');
+NavMenu::set_li_class('d-block', 'footerm');
+NavMenu::set_li_class('d-block', 'footerr');
