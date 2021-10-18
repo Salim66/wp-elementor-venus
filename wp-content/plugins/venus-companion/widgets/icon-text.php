@@ -143,6 +143,23 @@ class Icon_Text extends Widget_Base {
 		);
 
 		$this->add_control(
+			'text_alignment',
+			[
+				'label' => __( 'Text Alignment', 'venus-companion' ),
+				'type' => Controls_Manager::SELECT,
+				'default' => 'center',
+				'options' => [
+					'left' => __( 'Left', 'venus-companion' ),
+					'center' => __( 'Center', 'venus-companion' ),
+					'right' => __( 'Right', 'venus-companion' ),
+				],
+				'selectors' => [
+					'{{WRAPPER}} .box-hover' => 'text-align: {{VALUE}};',
+				],
+			]
+		);
+
+		$this->add_control(
 			'text_transform',
 			[
 				'label' => __( 'Text Transform', 'venus-companion' ),
@@ -176,7 +193,7 @@ class Icon_Text extends Widget_Base {
 		$settings = $this->get_settings_for_display();
 
 		?>
-		<div class="blurb blurb-border text-center box-hover mb-4">
+		<div class="blurb blurb-border box-hover mb-4">
 			<i class="<?php echo esc_attr($settings['icon']['value']); ?> text-primary"></i>
 			<h6 class="mb-2"><?php echo esc_html($settings['title']); ?></h6>
 			<p class="text-muted mb-0"><?php echo esc_html($settings['description']); ?></p>
